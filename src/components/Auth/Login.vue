@@ -35,7 +35,7 @@
                                     id="password"
                                     label="Password"
                                     name="password"
-                                    prepend-icon="lock"
+                                    prepend-icon="mdi-lock"
                                     type="password"
                                     :counter="6"
                                     :rules="passwordRules"
