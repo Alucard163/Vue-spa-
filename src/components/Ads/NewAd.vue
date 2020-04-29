@@ -75,9 +75,10 @@
                    const ad = {
                        title: this.title,
                        description: this.description,
-                       promo: this.promo
+                       promo: this.promo,
+                       imageSrc: "https://cdn.dribbble.com/users/594915/screenshots/2517640/portfolio_personal_vcard.jpg"
                    };
-                   console.log(ad);
+                   this.$store.dispatch('createAd', ad);
                 }
             }
         }
