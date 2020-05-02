@@ -50,7 +50,8 @@
                     <v-flex xs12>
                         <v-spacer></v-spacer>
                         <v-btn
-                                :disabled="!valid"
+                                :loading="loading"
+                                :disabled="!valid || loading"
                                 class="success"
                                 @click="createAd">Create ad</v-btn>
                     </v-flex>
@@ -69,6 +70,11 @@
             promo:false,
             valid: false
         }),
+        computed: {
+            loading () {
+                return this.$store.getters.loading;
+            }
+        },
         methods: {
             createAd () {
                 if (this.$refs.form.validate()) {
@@ -78,7 +84,11 @@
                        promo: this.promo,
                        imageSrc: "https://cdn.dribbble.com/users/594915/screenshots/2517640/portfolio_personal_vcard.jpg"
                    };
-                   this.$store.dispatch('createAd', ad);
+                   this.$store.dispatch('createAd', ad)
+                    .then(() => {
+                        this.$router.push('/list')
+                    })
+                    .catch(() => {})
                 }
             }
         }
