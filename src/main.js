@@ -3,10 +3,11 @@ import App from './App.vue'
 import store from './store'
 import Vuetify from "vuetify";
 import router from './router'
+import BuyModalComponent from '@/components/Shared/BuyModal'
 import vuetify from './plugins/vuetify';
 import * as fb from 'firebase';
 Vue.use(Vuetify);
-
+Vue.component('app-buy-modal', BuyModalComponent);
 Vue.config.productionTip = false;
 
 new Vue({
@@ -24,11 +25,12 @@ new Vue({
       appId: '1:545255814909:web:f352de1eab961247b7f094',
       measurementId: 'G-CJX5L1QRQ3'
     });
-        fb.auth().onAuthStateChanged(user => {
-          if (user) {
-            this.$store.dispatch('autoLoginUser', user)
-          }
-        })
+    fb.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.$store.dispatch('autoLoginUser', user)
+      }
+    });
+    this.$store.dispatch('fetchAds')
   },
   render: h => h(App)
 }).$mount('#app')
